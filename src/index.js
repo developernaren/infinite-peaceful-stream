@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 
 app.set('view engine', 'ejs');
+//this lets us use html files with ejs
 app.engine('html', require('ejs').renderFile);
 
 app.get('/', function (req, res) {
