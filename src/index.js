@@ -28,7 +28,7 @@ app.get('/', function (req, res) {
     })
 })
 
-const port = 8080
+const port = process.env.PORT || 8080
 
 console.log(`Server started at localhost:${port}`)
 
