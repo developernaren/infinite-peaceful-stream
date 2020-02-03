@@ -15,11 +15,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run tests
-        run: npm install && npm run jest
 
       - name: Checkout
         uses: actions/checkout@v1
+
+      - name: Run Tests
+        uses: actions/setup-node@v1
+          with:
+            node-version: '11.1'
+        run: npm install && npm run test
 
       # Setup gcloud CLI
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
