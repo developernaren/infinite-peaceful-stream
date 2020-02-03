@@ -1,23 +1,35 @@
 const draw = require('./draw')
+const express = require('express')
+const app = express()
 
-const cases = [
-    [20, 40, 6],
-    [60, 60, 10],
-    [80, 20, 16],
-    [80, 100, 20],
-]
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
 
-cases.forEach(data => {
-    let [width, height, padding] = data
-    result = draw(width, height, padding)
-    result.forEach(pixels => console.log(pixels.map(pixel => {
-        switch (pixel) {
-            case 2:
-                return '|'
-            case 1:
-                return '-'
-            case 0:
-                return ' '
-        }
-    }).join('')))
+app.get('/', function (req, res) {
+
+    let results = []
+    const width = req.query.width || 20
+    const height = req.query.height || 20
+    const padding = req.query.padding || 4
+    let errorText = null
+
+    try {
+         results = draw(width, height, padding)
+    } catch (error) {
+        errorText = error.message
+    }
+
+    res.render('index.html', {
+        results: JSON.stringify(results),
+        width,
+        height,
+        padding,
+        errorText
+    })
 })
+
+const port = 8080
+
+console.log(`Server started at localhost:${port}`)
+
+app.listen(port)

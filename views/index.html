@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>Infinite </title>
+    <style>
+        .row, form {
+            display: flex;
+            padding: 20px 20px;
+        }
+
+        span {
+            display: inline-block;
+            width: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <form>
+            <div>
+                <label for="width">Width</label>
+                <input type="number" id="width" name="width" value="<%= width %>">
+            </div>
+            <div>
+                <label for="height">Height</label>
+                <input type="number" id="height" name="height" value="<%= height %>">
+            </div>
+            <div>
+                <label for="height">Padding</label>
+                <input type="number" id="padding" name="padding" value="<%= padding %>">
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row" id="results">
+        <%if (errorText) { %>
+        <p class="error">Error: <%= errorText %></p>
+        <% } %>
+    </div>
+
+</div>
+
+<script>
+    let results = JSON.parse('<%= results %>');
+    let div = document.createElement("div");
+    let str = ''
+    results.forEach(function (pixels) {
+        pixels.forEach(function (pixel) {
+            switch (pixel) {
+                case 2:
+                    str += '<span>|</span>'
+                    break;
+                case 1:
+                    str += '<span>-</span>'
+                    break;
+                case 0:
+                    str += '<span>&nbsp;</span>'
+                    break;
+            }
+
+        })
+        str += "<br/>"
+    })
+    div.innerHTML = str
+    document.getElementById("results").appendChild(div);
+</script>
+</body>
+</html>

@@ -6,9 +6,25 @@
   "author": "",
   "license": "IIT",
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon src/index.js --exec node",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "tests/*"
+    ],
+    "delay": 2500,
+    "watch": [
+      "src/*"
+    ]
   }
 }

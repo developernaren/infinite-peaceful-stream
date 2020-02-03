@@ -6,4 +6,4 @@ COPY ./ /app
 WORKDIR /app
 RUN npm install
 
-ENTRYPOINT node src/index.js
+ENTRYPOINT npm run start
